@@ -1,0 +1,94 @@
+﻿@using E_recrutement.Models.ViewModels
+@model IsApplied
+@{
+    ViewData["Title"] = "Offer Details";
+}
+
+<div class="container-xxl py-5 bg-dark page-header mb-5">
+    <div class="container my-5 pt-5 pb-4">
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Job Detail</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb text-uppercase">
+                <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Offer">Home</a></li>
+                <li class="breadcrumb-item text-white active" aria-current="page">Job Detail</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container">
+        <div class="row gy-5 gx-4">
+            <div class="col-lg-8">
+                <div class="d-flex align-items-center mb-5">
+                    <img class="flex-shrink-0 img-fluid border rounded" src="~/img/@Model.offer.UrlCompanyLogo" alt="" style="width: 80px; height: 80px;">
+                    <div class="text-start ps-4">
+                        <h3 class="mb-3">@Model.offer.Poste</h3>
+                        <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>@Model.offer.Location</span>
+                        <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>@Model.offer.Type</span>
+                        <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>@Model.offer.Remuneration</span>
+                    </div>
+                </div>
+
+                <div class="mb-5">
+                    <h4 class="mb-3">Job description</h4>
+                    <p>@Model.offer.Description</p>
+                    <h4 class="mb-3">Responsibility</h4>
+                    <p>@Model.offer.Responsibilities</p>
+  
+                    <h4 class="mb-3">Qualifications</h4>
+                    <p>@Model.offer.Qualifications</p>
+                    
+                </div>
+                @if(!User.IsInRole("Recruteur")){
+                <div class="">
+                    <h4 class="mb-4">Apply For The Job</h4>
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="row g-3">
+                        @if (!Model.isApplied || !User.Identity.IsAuthenticated){
+                            <div class="col-12">
+                                <textarea class="form-control" rows="5" placeholder="Motivation lettre" name="lettre" id="lettre"></textarea>
+                            </div>
+
+                            <div class="col-4">
+                                    <button class="btn btn-primary w-100" type="submit" asp-controller="Offer" asp-route-id="@Model.offer.Id" asp-action="Apply">Apply Now</button>
+                            </div>
+                        } else{
+                            <div class="col-12">
+                                 <p class="text text-success">You have already applied for that offer</p>
+                            </div>
+                        }
+                        </div>
+                    </form>
+                </div>
+                }
+                else
+                {
+                    <div class="mb-5">
+                        <form method="post">
+                            
+                            <div class="col-4">
+                                <button type="submit" class="btn btn-primary w-100" asp-controller="Offer" asp-action="OthersOffers">Back</button>
+                            </div>
+                        </form>
+                    </div>
+                }
+            </div>
+            <div class="col-lg-4">
+                <div class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s">
+                    <h4 class="mb-4">Job Summery</h4>
+                    <p><i class="fa fa-angle-right text-primary me-2"></i>Published On: @Model.offer.DatePub</p>
+                    <p><i class="fa fa-angle-right text-primary me-2"></i>Vacancy: @Model.offer.Poste</p>
+                    <p><i class="fa fa-angle-right text-primary me-2"></i>Job Nature: @Model.offer.Type</p>
+                    <p><i class="fa fa-angle-right text-primary me-2"></i>Salary: @Model.offer.Remuneration</p>
+                    <p><i class="fa fa-angle-right text-primary me-2"></i>Location: @Model.offer.Location</p>
+                    <p class="m-0"><i class="fa fa-angle-right text-primary me-2"></i>Date Line: @Model.offer.DateLine</p>
+                </div>
+                <div class="bg-light rounded p-5 wow slideInUp" data-wow-delay="0.1s">
+                    <h4 class="mb-4">Company Detail</h4>
+                    <p class="m-0">@Model.offer.Company</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

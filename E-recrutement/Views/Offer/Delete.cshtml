@@ -1,0 +1,91 @@
+﻿@model Offer
+@{
+    ViewData["Title"] = "Offer Edit";
+}
+
+<form method="post" style="padding:10px;">
+    <div asp-validation-summary="All"></div>
+    <div class="row g-3">
+        <div class="col-12 col-sm-6">
+            <label asp-for="Type">Contract Type</label>
+            <select asp-for="Type">
+                <option value="@TypeContrat.CDI">CDI</option>
+                <option value="@TypeContrat.CDD">CDD</option>
+                <option value="@TypeContrat.INTERN">INTERN</option>
+            </select>
+            <span asp-validation-for="Type" class="text-danger"></span>
+        </div>
+
+        <div class="col-12 col-sm-6">
+            <label asp-for="Secteur">Secteur</label>
+            <input asp-for="Secteur" type="text" class="form-control" value="@Model.Secteur">
+            <span asp-validation-for="Secteur" class="text-danger"></span>
+        </div>
+
+        <div class="col-12 col-sm-6">
+            <label asp-for="Profil">Profil</label>
+            <select asp-for="Profil">
+                <option value="@Profile.Deug">Deug</option>
+                <option value="@Profile.Licence">Licence</option>
+                <option value="@Profile.Master">Master</option>
+                <option value="@Profile.Ingenieur">Ingenieur</option>
+            </select>
+            <span asp-validation-for="Profil" class="text-danger"></span>
+        </div>
+
+        <div class="col-12 col-sm-6">
+            <label asp-for="Poste">Poste</label>
+            <input asp-for="Poste" type="text" class="form-control" value="@Model.Poste">
+            <span asp-validation-for="Poste" class="text-danger"></span>
+        </div>
+
+        <div class="col-12 col-sm-6">
+            <label asp-for="Remuneration">Offer Salary</label>
+            <input asp-for="Remuneration" type="text" class="form-control" value="@Model.Remuneration">
+            <span asp-validation-for="Remuneration" class="text-danger"></span>
+        </div>
+
+        <div class="col-12 col-sm-6">
+            <label asp-for="Description">Offer Description</label>
+            <input asp-for="Description" type="text" class="form-control" value="@Model.Description">
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="col-12 col-sm-6">
+            <label asp-for="Responsibilities">Offer Responsibilities</label>
+            <textarea asp-for="Responsibilities" class="form-control" rows="5" value="@Model.Responsibilities"></textarea>
+            <span asp-validation-for="Responsibilities" class="text-danger"></span>
+        </div>
+
+        <div class="col-12 col-sm-6">
+            <label asp-for="Qualifications">Offer Qualifications</label>
+            <textarea asp-for="Qualifications" class="form-control" rows="5" value="@Model.Qualifications"></textarea>
+            <span asp-validation-for="Qualifications" class="text-danger"></span>
+        </div>
+
+        <div class="col-12 col-sm-6">
+            <label asp-for="Location">Offer Location </label>
+            <input asp-for="Location" type="text" class="form-control" value="@Model.Location">
+            <span asp-validation-for="Location" class="text-danger"></span>
+        </div>
+
+        <div class="col-12 col-sm-6">
+            <label asp-for="DateLine">Offer Date Line</label>
+            <input asp-for="DateLine" type="date" class="form-control" value="@Model.DateLine">
+            <span asp-validation-for="DateLine" class="text-danger"></span>
+        </div>
+
+        <div class="col-2">
+            <button class="btn btn-danger w-100" type="submit" asp-controller="Offer" asp-route-id="@Model.Id" asp-action="Delete">Delete offer</button>
+        </div>
+        <div class="col-2">
+            <button class="btn btn-primary w-100" asp-controller="Offer" asp-action="Index">Cancel</button>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

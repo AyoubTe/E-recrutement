@@ -1,0 +1,53 @@
+﻿@using E_recrutement.Models.ViewModels
+@model Postule
+
+<div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container">
+        <div class="row gy-5 gx-4">
+            <div class="col-lg-8">
+                <div class="d-flex align-items-center mb-5">
+                    <img class="flex-shrink-0 img-fluid border rounded" src="~/img/@Model.Candidature.ConcernedOffer.UrlCompanyLogo" alt="" style="width: 80px; height: 80px;">
+                    <div class="text-start ps-4">
+                        <h3 class="mb-3">@Model.User.FamilyName @Model.User.FirstName</h3>
+                        <span class="text-truncate me-3"><i class="fa fa-diplome text-primary me-2"></i>@Model.User.Diplome</span>
+                        <span class="text-truncate me-3"><i class="far fa-profile text-primary me-2"></i>@Model.User.Profil</span>
+                    </div>
+                </div>
+
+                <div class="mb-5">
+                    <iframe src="~/CVs/@Model.User.CV" width="700" height="400">
+                        Ce document PDF @Model.User.CV.
+                    </iframe>
+                </div>
+
+                <div class="">
+                    <h4 class="mb-4">Motivation Lettre</h4>
+                    <form method="post">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <textarea class="form-control" rows="5" disabled>@Model.Candidature.Apply.MotivationLettre</textarea>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100" style="width= 50px;" asp-controller="Offer" asp-action="ReceivedApplications">Back</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s">
+                    <h4 class="mb-4"> Summary</h4>
+                    <p><i class="fa fa-angle-right text-primary me-2"></i>Recieved On: @Model.Candidature.Apply.DateApplication</p>
+                    <p><i class="fa fa-angle-right text-primary me-2"></i>Vacancy: @Model.Candidature.ConcernedOffer.Poste</p>
+                    <p><i class="fa fa-angle-right text-primary me-2"></i>Years of experience: @Model.User.NbAnsExp</p>
+                    <p><i class="fa fa-angle-right text-primary me-2"></i>Diplome: @Model.User.Diplome</p>
+
+                    <h4 class="mb-4"> Contact </h4>
+                    <p><i class="fa fa-angle-right text-primary me-2"></i>Tel: @Model.User.PhoneNumber</p>
+                    <p><i class="fa fa-angle-right text-primary me-2"></i>Tel: @Model.User.Email</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

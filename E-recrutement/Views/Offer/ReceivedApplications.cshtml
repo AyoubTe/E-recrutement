@@ -1,0 +1,47 @@
+﻿@using E_recrutement.Models.ViewModels
+
+@model List<Application>
+
+@{
+    ViewData["Title"] = "Received Applications";
+}
+
+<div class="container-xxl py-5">
+    <div class="container">
+            <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Applications received </h1>
+            <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane fade show p-0 active">
+                    @if(Model != null)
+                    {
+                        @foreach (var obj in Model)
+                        {
+                            <h2 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">@obj.ConcernedOffer.Poste</h2>
+                            @foreach (var candidat in obj.Canidats)
+                            {
+                                <div class="job-item p-4 mb-4">
+                                    <div class="row g-4">
+                                        <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                            <img class="flex-shrink-0 img-fluid border rounded" src="~/img/candidat.svg" alt="" style="width: 80px; height: 80px;">
+                                            <div class="text-start ps-4">
+                                                <h5 class="mb-3">@candidat.FamilyName @candidat.FirstName</h5>
+                                                <span class="text-truncate me-3">@candidat.Diplome</span>
+                                                <span class="text-truncate me-3">@candidat.Age</span>
+                                                <span class="text-truncate me-0">@candidat.NbAnsExp</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                            <div class="d-flex mb-3">
+                                                <a class="btn btn-primary" asp-controller="Offer" asp-route-name="@candidat.Id" asp-route-id="@obj.ConcernedOffer.Id" asp-action="ConsulterApplication">Check Application</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+                </div>
+            </div>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+﻿<div class="form-floating mb-3">
+    <input asp-for="Input.Company" class="form-control" autocomplete="company" aria-required="true" placeholder="company you work for" />
+    <label asp-for="Input.Company">Company</label>
+    <span asp-validation-for="Input.Company" class="text-danger"></span>
+</div>
+
+<div class="form-floating mb-3">
+    <input asp-for="Input.UrlImageCompany" accept="image/jpeg, image/png" class="form-control" aria-required="true" type="file" name="file" />
+    <label asp-for="Input.UrlImageCompany">Company Logo</label>
+    <span asp-validation-for="Input.UrlImageCompany" class="text-danger"></span>
+</div>

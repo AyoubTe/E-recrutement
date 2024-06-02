@@ -1,0 +1,34 @@
+﻿<div class="form-floating mb-3">
+    <input asp-for="Input.Titre" class="form-control" autocomplete="company" aria-required="true" placeholder="company you work for" />
+    <label asp-for="Input.Titre">Titre</label>
+    <span asp-validation-for="Input.Titre" class="text-danger"></span>
+</div>
+
+<div class="form-floating mb-3">
+    <input asp-for="Input.Diplome" class="form-control" autocomplete="diplome" aria-required="true" placeholder="your diplome" />
+    <label asp-for="Input.Diplome">Diplome</label>
+    <span asp-validation-for="Input.Diplome" class="text-danger"></span>
+</div>
+
+<div class="form-floating mb-3">
+    <input asp-for="Input.NbAnsExp" class="form-control" autocomplete="years-experience" aria-required="true" type="number" />
+    <label asp-for="Input.NbAnsExp">Number of years of experience</label>
+    <span asp-validation-for="Input.NbAnsExp" class="text-danger"></span>
+</div>
+
+<div class="form-floating mb-3">
+    <label asp-for="Input.Profil">Your profile</label><br /><br />
+    <select asp-for="Input.Profil">
+        <option value="@Profile.Deug">Deug</option>
+        <option value="@Profile.Licence">Licence</option>
+        <option value="@Profile.Master">Master</option>
+        <option value="@Profile.Ingenieur">Ingenieur</option>
+    </select>
+    <span asp-validation-for="Input.Profil" class="text-danger"></span>
+</div>
+
+<div class="form-floating mb-3">
+    <input accept=".pdf" class="form-control" aria-required="true" type="file" name="file" />
+    <label asp-for="Input.CV">Resume</label>
+    <span asp-validation-for="Input.CV" class="text-danger"></span>
+</div>

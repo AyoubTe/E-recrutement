@@ -1,0 +1,129 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profile";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<h3>@ViewData["Title"]</h3>
+<partial name="_StatusMessage" for="StatusMessage" />
+<div class="row">
+    <section style="background-color: #eee;margin-bottom: 20px;">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col">
+                    <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index" style="color:blue;">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Profile</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card mb-4">
+                        <div class="card-body text-center">
+                            <img src="./../../../img/iconnu-profile.jpeg" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                            <h5 class="my-3" style="color: orange; font-size:35px;">@Model.user2.Company</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0" style="color:red; font-size:20px;">Full Name</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">@Model.user2.FirstName @Model.user2.FamilyName</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0" style="color:red; font-size:20px;">Age</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">@Model.user2.Age</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0" style="color:red; font-size:20px;">Email</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">@Model.user2.Email</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="col-md-4">
+        <form id="profile-form" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Please enter your phone number."/>
+                <label asp-for="Input.PhoneNumber" class="form-label"></label>
+                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+            </div>
+
+            @if (!User.IsInRole("Recruteur"))
+            {
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Titre" class="form-control" placeholder="Please choose your title." />
+                    <label asp-for="Input.Titre" class="form-label"></label>
+                    <span asp-validation-for="Input.Titre" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.NbAnsExp" class="form-control" placeholder="Please enter number of years of your experience." />
+                    <label asp-for="Input.NbAnsExp" class="form-label"></label>
+                    <span asp-validation-for="Input.NbAnsExp" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Diplome" class="form-control" placeholder="Please enter your diploma." />
+                    <label asp-for="Input.Diplome" class="form-label"></label>
+                    <span asp-validation-for="Input.Diplome" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.CV" name="file" class="form-control" type="file" accept=".pdf" enctype="multipart/form-data" name="file" id="file" />
+                    <label asp-for="Input.CV" class="form-label"></label>
+                    <span asp-validation-for="Input.CV" class="text-danger"></span>
+                </div>
+            } else {
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Company" class="form-control" placeholder="Please enter your company." />
+                    <label asp-for="Input.Company" class="form-label"></label>
+                    <span asp-validation-for="Input.Company" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.UrlImageCompany" class="form-control" accept="image/jpeg, image/png" type="file" name="file" id="file" />
+                    <label asp-for="Input.UrlImageCompany" class="form-label"></label>
+                    <span asp-validation-for="Input.UrlImageCompany" class="text-danger"></span>
+                </div>
+            }
+
+            <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <iframe src="./../../../CVs/@Model.user2.CV" width="740" height="420">
+            Ce document PDF @Model.user2.CV.
+        </iframe>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
