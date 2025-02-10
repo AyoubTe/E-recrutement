@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: e-recrutement
+  labels:
+    app: e-recrutement
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: e-recrutement
+  template:
+    metadata:
+      labels:
+        app: e-recrutement
+    spec:
+      initContainers:
+      - name: migrations
+        image: ayoubtec/e-recrutement:latest
+        command: ["dotnet", "ef", "database", "update"]
+        env:
+        - name: ConnectionStrings__DefaultConnection
+          value: "Server=sqlserver;Database=recruterDB;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=True"
+      containers:
+      - name: e-recrutement
+        image: ayoubtec/e-recrutement:latest
+        ports:
+        - containerPort: 5000
+        env:
+        - name: ConnectionStrings__DefaultConnection
+          value: "Server=sqlserver;Database=recruterDB;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=True"
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Production"
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"

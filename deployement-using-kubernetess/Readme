@@ -1,0 +1,40 @@
+-- Commands
+minikube start: to start the kubernetes cluster
+
+minikube stop : to stop the kubernetes cluster
+
+minikube delete : to delete Minikube:
+
+-- How to publish an docker image on a DockerHub
+
+1)
+docker build -t ayoubtec/containerName:latest .
+
+2)
+docker tag yourdockerhubusername/e-recrutement:latest yourdockerhubusername/e-recrutement:v1.0
+
+3)
+docker push yourdockerhubusername/e-recrutement:latest
+
+
+kubectl exec -it sqlserver -- /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "YourStrong!Passw0rd"
+
+
+# kubectl : commands
+# Apply SQL Server deployment and service
+kubectl apply -f sqlserver-deployment.yaml
+kubectl apply -f sqlserver-service.yaml
+
+# Apply E-recrutement deployment and service
+kubectl apply -f e-recrutement-deployment.yaml
+kubectl apply -f e-recrutement-service.yaml
+
+# Apply migrations
+kubectl apply -f migrations-job.yaml
+
+# Kubectl remove containers
+kubectl delete -f e-recrutement-deployment.yaml
+kubectl delete -f e-recrutement-service.yaml
+kubectl delete -f sqlserver-deployment.yaml
+kubectl delete -f sqlserver-service.yaml
+

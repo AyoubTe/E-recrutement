@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: e-recrutement-migrations
+spec:
+  template:
+    spec:
+      containers:
+      - name: migrations
+        image: ayoubtec/e-recrutement:latest
+        command: ["dotnet", "ef", "database", "update"]
+        env:
+        - name: ConnectionStrings__DefaultConnection
+          value: "Server=sqlserver;Database=recruterDB;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=True"
+      restartPolicy: Never
+  backoffLimit: 4
